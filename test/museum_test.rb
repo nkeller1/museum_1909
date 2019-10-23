@@ -3,6 +3,7 @@ require 'minitest/pride'
 require './lib/exhibit'
 require './lib/patron'
 require './lib/museum'
+require 'pry'
 
 
 class MuseumTest < Minitest::Test
@@ -46,5 +47,38 @@ class MuseumTest < Minitest::Test
 
     assert_equal [@gems_and_minerals, @dead_sea_scrolls], @dmns.recommend_exhibits(@bob)
     assert_equal [@imax], @dmns.recommend_exhibits(@sally)
+  end
+
+  def test_it_can_have_patrons
+    assert_equal [], @dmns.patrons
+  end
+
+  def test_admit
+    @dmns.add_exhibit(@gems_and_minerals)
+    @dmns.add_exhibit(@dead_sea_scrolls)
+    @dmns.add_exhibit(@imax)
+
+    @bob.add_interest("Dead Sea Scrolls")
+    @bob.add_interest("Gems and Minerals")
+    @sally.add_interest("IMAX")
+
+    @dmns.admit(@bob)
+    @dmns.admit(@sally)
+
+    assert_equal [@bob, @sally], @dmns.patrons
+  end
+
+  def test_patrons_by_exhibit_interest
+    @dmns.add_exhibit(@gems_and_minerals)
+    @dmns.add_exhibit(@dead_sea_scrolls)
+    @dmns.add_exhibit(@imax)
+
+    @bob.add_interest("Dead Sea Scrolls")
+    @bob.add_interest("Gems and Minerals")
+    @sally.add_interest("IMAX")
+
+    @dmns.admit(@bob)
+    @dmns.admit(@sally)
+    
   end
 end
