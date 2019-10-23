@@ -27,8 +27,9 @@ class Museum
   end
 
   def patrons_by_exhibit_interest
-    exhibit_interest = {}
-    
+    exhibit_interest = Hash.new
+      exhibit_interest.map do |exhibit, patrons|
+    end
   end
 
 end
