@@ -2,12 +2,13 @@ require 'pry'
 
 class Museum
 
-  attr_reader :name, :exhibits, :patrons
+  attr_reader :name, :exhibits, :patrons, :exhibit_interest
 
   def initialize(name)
     @name =  name
     @exhibits = []
     @patrons = []
+    @exhibit_interest = Hash.new
   end
 
   def add_exhibit(exhibit)
@@ -27,8 +28,10 @@ class Museum
   end
 
   def patrons_by_exhibit_interest
-    exhibit_interest = Hash.new
-      exhibit_interest.map do |exhibit, patrons|
+      @exhibit_interest.select do |exhibit, patron|
+        if exhibit && patron.interests == true
+          exhibit_interest
+        end
     end
   end
 
