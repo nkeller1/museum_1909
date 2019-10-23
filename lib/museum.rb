@@ -28,6 +28,7 @@ class Museum
   end
 
   def patrons_by_exhibit_interest
+        binding.pry
       @exhibit_interest.select do |exhibit, patron|
         if exhibit && patron.interests == true
           exhibit_interest
